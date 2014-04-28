@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """\
 
-12-14-2013: Removed the StopWordsArabic class in order to remove nltk dependency for PyTeaser 
+12-14-2013: Removed the StopWordsArabic class in order to remove nltk dependency for PyTeaser
 
 This is a python port of "Goose" orignialy licensed to Gravity.com
 under one or more contributor license agreements.  See the NOTICE file
@@ -128,23 +128,6 @@ class StopWords(object):
         ws.set_stopword_count(len(overlapping_stopwords))
         ws.set_stop_words(overlapping_stopwords)
         return ws
-
-
-class StopWordsChinese(StopWords):
-    """
-    Chinese segmentation
-    """
-    def __init__(self, language='zh'):
-        # force zh languahe code
-        super(StopWordsChinese, self).__init__(language='zh')
-
-    def candiate_words(self, stripped_input):
-        # jieba build a tree that takes sometime
-        # avoid building the tree if we don't use
-        # chinese language
-        import jieba
-        return jieba.cut(stripped_input, cut_all=True)
-
 
 class StopWordsArabic(StopWords):
     """
