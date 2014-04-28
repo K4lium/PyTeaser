@@ -68,7 +68,7 @@ def SummarizeUrl(url):
     try:
         article = grab_link(url)
     except IOError:
-        print 'IOError'
+        print('IOError')
         return None
 
     #print ">>> " + str(high) + " - " + item['Source'] + " >>> " + highsen
@@ -105,7 +105,7 @@ def grab_link(inurl):
         article = Goose().extract(url=inurl)
         return article
     except ValueError:
-        print 'Goose error grab'
+        print('Goose error grab')
         return None
     return None
 
@@ -197,7 +197,7 @@ def keywords(text):
         articleScore = keywords[k]*1.0 / numWords
         keywords[k] = articleScore * 1.5 + 1
 
-    keywords = sorted(keywords.iteritems(), key=itemgetter(1))
+    keywords = sorted(iter(keywords.items()), key=itemgetter(1))
     keywords.reverse()
     return dict(keywords)
 
@@ -214,7 +214,7 @@ def split_sentences(text):
     '''
     
     sentences = regex_split('(?<![A-Z])([.!?]"?)(?=\s+\"?[A-Z])', text)
-    s_iter = zip(*[iter(sentences[:-1])] * 2)
+    s_iter = list(zip(*[iter(sentences[:-1])] * 2))
     s_iter = [''.join(map(str,y)).lstrip() for y in s_iter]
     s_iter.append(sentences[-1])
     return s_iter

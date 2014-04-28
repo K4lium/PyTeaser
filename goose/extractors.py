@@ -22,14 +22,14 @@ limitations under the License.
 """
 import re
 from copy import deepcopy
-from urlparse import urlparse, urljoin
+from urllib.parse import urlparse, urljoin
 from goose.utils import StringSplitter
 from goose.utils import StringReplacement
 from goose.utils import ReplaceSequence
 
 MOTLEY_REPLACEMENT = StringReplacement("&#65533;", "")
-ESCAPED_FRAGMENT_REPLACEMENT = StringReplacement(u"#!", u"?_escaped_fragment_=")
-TITLE_REPLACEMENTS = ReplaceSequence().create(u"&raquo;").append(u"»")
+ESCAPED_FRAGMENT_REPLACEMENT = StringReplacement("#!", "?_escaped_fragment_=")
+TITLE_REPLACEMENTS = ReplaceSequence().create("&raquo;").append("»")
 PIPE_SPLITTER = StringSplitter("\\|")
 DASH_SPLITTER = StringSplitter(" - ")
 ARROWS_SPLITTER = StringSplitter("»")
@@ -90,7 +90,7 @@ class ContentExtractor(object):
             used_delimeter = True
 
         # split title with »
-        if not used_delimeter and u'»' in title_text:
+        if not used_delimeter and '»' in title_text:
             title_text = self.split_title(title_text, ARROWS_SPLITTER)
             used_delimeter = True
 
